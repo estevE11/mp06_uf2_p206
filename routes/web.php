@@ -19,4 +19,6 @@ Route::get('/', function () {
 });
 
 //Route::get('/coche/{id}', 'CocheController@show');
-Route::get('/coche/{id}', [CocheController::class, 'show']);
+Route::get('/coche', [CocheController::class, 'index']);
+Route::get('/coche/{id}', [CocheController::class, 'edit']);
+Route::put('/edit-coche/{id}', [CocheController::class, 'update']);
