@@ -3,6 +3,7 @@
 @section('title', 'Visualitzador avançat de vehicles a motor')
 
 @section('content')
+<?php if(isset($err)) echo $err;?>
 <div class="container-fluid">
     <div class="row">
         <div class="col-3"></div>
@@ -43,8 +44,8 @@
                     $al = 'danger';
                     $msg = 'No sha pogut actualitzar el vehicle';
                     if($updated) {
-                        $al = 'succcess';
-                        $msg = 'Vehicle actualitzat correctement';
+                        $al = 'success';
+                        $msg = 'Vehicle actualitzat correctement!';
                     }
                     echo '<div class="alert alert-'. $al . '">' . $msg . '</div>';
                 }

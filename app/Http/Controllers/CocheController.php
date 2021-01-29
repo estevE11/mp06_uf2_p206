@@ -36,7 +36,14 @@ class CocheController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $coche = Coche::create($request->all());
+            return \redirect("/coche/$coche->id");
+        }
+        catch(\Exception $e) {
+            return \redirect("/coche/create")->with("errorCreating", true);
+        }
+
     }
 
     /**
@@ -82,6 +89,7 @@ class CocheController extends Controller
         }
         catch(\Exception $e) {
             $updated = false;
+            return view("showcoche", ['updated'=> $updated, 'err' => $e->getMessage()])->with('coche', $coche);
         }
 
         return view("showcoche", ['updated'=> $updated])->with('coche', $coche);//->with("updated", $updated);

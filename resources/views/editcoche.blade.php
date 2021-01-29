@@ -3,6 +3,12 @@
     if(isset($coche)) {
         $editMode = true;
     }
+    
+    $met = '';
+    if(isset($coche)) {
+        $met ='PUT';
+    }
+
 ?>
 
 @extends('master')
@@ -31,9 +37,11 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="/coche/{{$coche->id}}" method="POST" id="car-data">
+                    <form action="/coche/{{$coche->id ?? ''}}" method="POST" id="car-data">
                         @csrf
-                        @method('PUT')
+                        @if ($met == 'PUT')
+                            @method('PUT')
+                        @endif
                         <div class="row">
                             <div class="form-group">
                                 <label for="">Maker</label>
