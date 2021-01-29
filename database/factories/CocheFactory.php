@@ -2,18 +2,18 @@
 
 namespace Database\Factories;
 
-use App\Models\User;
+use App\Models\Coche;
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Illuminate\Support\Str;
+use Faker\Generator as Faker;
 
-class UserFactory extends Factory
+class CocheFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Coche::class;
 
     /**
      * Define the model's default state.
@@ -23,9 +23,9 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'maker' => $faker->name,
-            'model' => $faker->paragraph,
-            'produced_on' => $faker->state
+            'make' => $this->faker->name,
+            'model' => $this->faker->paragraph,
+            'produced_on' => $this->faker->dateTime('now', null)
         ];
     }
 }

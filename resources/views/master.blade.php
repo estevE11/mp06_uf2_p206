@@ -13,7 +13,7 @@
     @section('header')
         <div class="containe-fluid">
             <nav class="navbar navbar-light bg-light">
-                Practica 205 - Mostrador de cotxes -  @yield('title')
+                Practica 206 - Mostrador de cotxes -  @yield('title')
             </nav>
         </div>
         <br>

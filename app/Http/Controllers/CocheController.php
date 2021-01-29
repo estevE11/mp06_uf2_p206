@@ -25,7 +25,7 @@ class CocheController extends Controller
      */
     public function create()
     {
-        //
+        return view('editcoche');
     }
 
     /**
@@ -47,6 +47,8 @@ class CocheController extends Controller
      */
     public function show($id)
     {
+        $coche = Coche::find($id);
+        return view('showcoche')->with('coche', $coche);
     }
 
     /**
@@ -70,9 +72,19 @@ class CocheController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $coche = Coche::find($id);
-        $coche->update($request->all);
-        return view('listcoche')->with('coche', $coche);
+
+        $updated = true;
+        $coche;
+
+        try {
+            $coche = Coche::find($id);
+            $coche->update($request->all());
+        }
+        catch(\Exception $e) {
+            $updated = false;
+        }
+
+        return view("showcoche", ['updated'=> $updated])->with('coche', $coche);//->with("updated", $updated);
     }
 
     /**

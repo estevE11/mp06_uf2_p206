@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use App\Models\Coche;
 
 class CocheTableSeeder extends Seeder
 {
@@ -13,6 +14,6 @@ class CocheTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Coche::class, 5)->create();
+        Coche::factory()->times(5)->create();
     }
 }

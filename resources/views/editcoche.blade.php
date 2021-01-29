@@ -1,3 +1,10 @@
+<?php
+    $editMode = false;
+    if(isset($coche)) {
+        $editMode = true;
+    }
+?>
+
 @extends('master')
 
 @section('title', 'Visualitzador avançat de vehicles a motor')
@@ -24,7 +31,8 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <form action="/edit-coche/{{$coche->id}}" method="POST" id="car-data">
+                    <form action="/coche/{{$coche->id}}" method="POST" id="car-data">
+                        @csrf
                         @method('PUT')
                         <div class="row">
                             <div class="form-group">
@@ -41,7 +49,7 @@
                         <div class="row">
                             <div class="form-group">
                                 <label for="">Production date</label>
-                                <input type="date" class="form-control" id="inpt-date" name="produced_date">
+                                <input type="date" class="form-control" id="inpt-date" name="produced_on">
                             </div>
                         </div>
                     </form>
@@ -57,7 +65,7 @@
     let coche;
 
     window.onload = () => {
-        coche = <?php echo json_encode($coche); ?>;
+        coche = <?php if($editMode) {echo json_encode($coche);} else echo null;?>;
         $('#inpt-maker').val(coche.make);
         $('#inpt-model').val(coche.model);
         document.getElementById("inpt-date").valueAsDate = new Date(coche.produced_on)

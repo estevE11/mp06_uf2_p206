@@ -14,7 +14,9 @@
                             <h4 class="mt-1">Cotxes</h4>
                         </div>
                         <div class="col">
-                            <button class="btn btn-success float-right"><b>+</b></button>
+                            <a href="/coche/create">
+                                <button class="btn btn-success float-right"><b>+</b></button>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -23,9 +25,9 @@
                       <thead>
                         <tr>
                           <th scope="col">#</th>
-                          <th scope="col">Make</th>
+                          <th scope="col">Fabricant</th>
                           <th scope="col">Model</th>
-                          <th scope="col">Production date</th>
+                          <th scope="col">Data de producció</th>
                         </tr>
                       </thead>
                       <tbody>
