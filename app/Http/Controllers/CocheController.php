@@ -102,7 +102,15 @@ class CocheController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
-    {
-        //
+    {                
+        try {
+            $coche = Coche::find($id);
+            $coche->delete();
+        }
+        catch(\Exception $e) {
+            return redirect('/coche')->with('deleted', false);
+        }
+
+        return redirect('/coche')->with('deleted', true);
     }
 }
