@@ -14,6 +14,9 @@
                             <h4 class="mt-1">Cotxes</h4>
                         </div>
                         <div class="col">
+                            <input type="text" class="form-control float-right" id="searchbar" style="font-size: 18px;" placeholder="Buscar...">
+                        </div>
+                        <div class="col-1">
                             <a href="/coche/create">
                                 <button class="btn btn-success float-right p-1">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
@@ -24,7 +27,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
+                <div class="card-body pb-0">
                     <table class="table">
                       <thead>
                         <tr>
@@ -34,7 +37,7 @@
                           <th scope="col">Data de producció</th>
                         </tr>
                       </thead>
-                      <tbody>
+                      <tbody id="tb-cotxes">
                         @foreach($coches as $coche) 
                             <tr>
                                 <th scope="row">{{$coche->id}}</th>
@@ -54,20 +57,38 @@
 
 <script>
     let coche;
+    let cotxes;
 
     window.onload = () => {
-        coche = <?php echo json_encode($coche); ?>;
+        cotxes = <?php echo json_encode($coches); ?>;
+        
+        const searchbar = $('#searchbar');
+        searchbar.keyup(()=> {
+            const search = searchbar.val();
+            const list = filter(search);
+            console.log(list);
+            renderTable(list.length > 0 ? list : cotxes);
+        });
     }
 
-    function goToCreate() {
-        window.location.href = "";
-    }
-    function goToEdit(id) {
-        window.location.href = "";
+    function renderTable(list) {
+        let tablebody = $('#tb-cotxes');
+        tablebody.html('');
+        for(let i = 0; i < list.length; i++) {
+            tablebody.append(`
+                <tr>
+                    <th scope="row">${list[i].id}</th>
+                    <th><a href="/coche/${list[i].id}">${list[i].make}</a></th>
+                    <td>${list[i].model}</td>
+                    <td>${list[i].produced_on}</td>
+                </tr>
+            `);
+        }
     }
 
-    function go(id) {
-        window.location = id;
+    function filter(search) {
+        return cotxes.filter(cotxe => cotxe.make.toLowerCase().includes(search.toLowerCase()) || cotxe.model.toLowerCase().includes(search.toLowerCase()) ||
+        cotxe.produced_on.toLowerCase().includes(search.toLowerCase()));
     }
 </script>
 
